@@ -24,21 +24,17 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $dbname = "sito_volontariato";
     $user = "root";
     $pass = "";
-
     try {
         $pdo = new PDO("mysql:host=$host;dbname=$dbname;charset=utf8", $user, $pass);
         $pdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
 
-        $checkEmail = "SELECT COUNT(*) FROM utenti WHERE Email = :Email";
-        $stmtCheck = $pdo->prepare($checkEmail);
+        $stmtCheck = $pdo->prepare("SELECT ruolo FROM utenti WHERE Email = :Email");
         $stmtCheck->execute([':Email' => $email]);
-        
-        if ($stmtCheck->fetchColumn() > 0) {
-            if ($ruolo === 'admin') {
-                header("Location: admin.php");
-            } else {
-                header("Location: prenotazione.php");
-            }
+        $userEsistente = $stmtCheck->fetch();
+        if ($userEsistente) {
+            $_SESSION['email'] = $email;
+            $_SESSION['ruolo'] = $userEsistente['ruolo'];
+            header("Location: " . ($_SESSION['ruolo'] === 'admin' ? "admin.php" : "prenotazione.php"));
             exit();
         }
 

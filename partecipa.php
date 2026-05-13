@@ -7,11 +7,10 @@ if(!isset($_SESSION['ruolo'])) {
     header("Location: admin.php");
     exit();
 }
-
-    $nome_attivita = isset($_GET['nome_attivita']);
+$conn = new mysqli("localhost", "root", "", "sito_volontariato");
+$nome_attivita = isset($_GET['nome_attivita']) ? $_GET['nome_attivita'] : "Attività non specificata";
 
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
-    $conn = new mysqli("localhost", "root", "", "sito_volontariato");
     $stmt = $conn->prepare("INSERT INTO partecipanti_attivita (nome, cognome, eta, nome_attivita, data_iscrizione) VALUES (?, ?, ?, ?, NOW())");
     $stmt->bind_param("ssis", $_POST['nome'], $_POST['cognome'], $_POST['eta'], $_POST['nome_attivita']);
     $stmt->execute();
@@ -31,24 +30,24 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 <body>
 <div class="form-container">
   <h2 class="text-center mb-2">Partecipazione</h2>
-  <div class="info-att text-center">Stai partecipando a:<br> <?php echo htmlspecialchars($nome_attivita); ?></div>
+  <div class="info-att text-center">Stai partecipando a:<br> <?php echo $nome_attivita; ?></div>
   
   <form method="POST" action="partecipa.php">
-    <input type="hidden" name="nome_attivita" value="<?php echo htmlspecialchars($nome_attivita); ?>">
+    <input type="hidden" name="nome_attivita" value="<?php echo $nome_attivita; ?>">
 
     <div class="mb-3">
       <label for="n" class="form-label">Nome:</label>
-      <input type="text" class="form-control" id="n" name="nome" required>
+      <input type="text" class="form-control" id="n" name="nome">
     </div>
 
     <div class="mb-3">
       <label for="c" class="form-label">Cognome:</label>
-      <input type="text" class="form-control" id="c" name="cognome" required>
+      <input type="text" class="form-control" id="c" name="cognome">
     </div>
 
     <div class="mb-3">
       <label for="e" class="form-label">Età:</label>
-      <input type="number" class="form-control" id="e" name="eta" min="1" max="99" required>
+      <input type="number" class="form-control" id="e" name="eta" min="1" max="99">
     </div>
 
     <div class="text-center">

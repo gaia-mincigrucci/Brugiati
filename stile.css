@@ -79,12 +79,25 @@ h1
     width: 100%;
 }
 
-h2, h3 
+h2 
 {
     color: #2e7d32;
     margin: 15px auto 10px auto;
     text-align: center;
-    font-size: 2.3rem; /* Più piccolo e discreto */
+    font-size: 2.5rem; /* Più piccolo e discreto */
+    text-transform: none; /* Rimuove il tutto maiuscolo se preferisci */
+    
+    /* Sottile linea verde sotto invece dello sfondo */
+    border-bottom: 2px solid rgba(46, 125, 50, 0.3);
+    padding-bottom: 5px;
+    display: table; /* Serve solo a non far andare la linea da parte a parte */
+}
+h2 
+{
+    color: #2e7d32;
+    margin: 15px auto 10px auto;
+    text-align: center;
+    font-size: 1.8rem; /* Più piccolo e discreto */
     text-transform: none; /* Rimuove il tutto maiuscolo se preferisci */
     
     /* Sottile linea verde sotto invece dello sfondo */
@@ -229,4 +242,48 @@ ul
 {
     #menu { flex-direction: column; }
     h1 { font-size: 1.8rem; }
+}
+.activity 
+{
+    background: white;
+    margin: 20px auto;
+    padding: 20px;
+    border-radius: 15px;
+    box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+    max-width: 800px; /* Larghezza del riquadro */
+    
+    /* Forza l'allineamento orizzontale */
+    display: flex; 
+    align-items: center; /* Centra verticalmente immagine e testo */
+    gap: 20px; /* Spazio tra immagine e testo */
+}
+
+/* Stile per l'immagine a sinistra */
+.activity img 
+{
+    width: 200px;
+    height: auto;
+    border-radius: 10px;
+    object-fit: cover;
+}
+
+/* Stile per il blocco di testo a destra */
+.description 
+{
+    flex: 1; /* Prende tutto lo spazio rimanente a destra */
+    text-align: left; /* Testo allineato a sinistra */
+    display: flex;
+    flex-direction: column; /* Mette titolo, p e bottone uno sotto l'altro */
+    align-items: flex-start; /* Allinea il bottone a sinistra dentro il testo */
+}
+
+.description h3 
+{
+    margin-top: 0;
+    color: #2e7d32;
+}
+
+.description button 
+{
+    margin-top: 10px; /* Distanza dal paragrafo */
 }

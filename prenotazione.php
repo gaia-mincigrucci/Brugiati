@@ -20,13 +20,22 @@ if(!isset($_SESSION['ruolo'])) {
     <h2>Prenota la tua partecipazione</h2>
     <div class="gallery">
         <div class="activity">
-            <img src="logo.png" alt="Attività" style="width:200px;">
+            <img src="Gemini_Generated_Image_xfrihpxfrihpxfri.png" alt="Attività trasimeno">
             <div class="description">
                 <h3>Pulizia Spiaggia Magione</h3>
                 <p>Unisciti a noi per la pulizia delle rive del lago Trasimeno.</p>
-                <a href="partecipa.php?nome_attivita="Pulizia Spiaggia"><button>PARTECIPA</button></a>
+                <a href="partecipa.php?nome_attivita=Pulizia_Spiaggia"><button>PARTECIPA</button></a>
             </div>
         </div>
+        <div class="activity">
+            <img src="Gemini_Generated_Image_3eza13eza13eza13.png" alt="Attività Tevere">
+            <div class="description">
+                <h3>Pulizia del Tevere</h3>
+                <p>Collabora alla rimozione dei rifiuti lungo gli argini del fiume Tevere.</p>
+                <a href="partecipa.php?nome_attivita=Pulizia_Tevere"><button>PARTECIPA</button></a>
+            </div>
+        </div>
+    </div>
     </div>
 </body>
 </html>

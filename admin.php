@@ -1,7 +1,6 @@
 <?php
 session_start();
 
-// Controllo sicurezza: solo l'admin (tu) può entrare
 if(!isset($_SESSION['ruolo']) || $_SESSION['ruolo'] !== 'admin') {
     header("Location: registrazione.php");
     exit();
@@ -102,7 +101,7 @@ if ($conn->connect_error) {
                         echo "<input type='hidden' name='id' value='" . $row2["id"] . "'>";
                         echo "<button type='submit'>MODIFICA</button>";
                         echo "</form>";
-                        echo "<form action='elimina_utente.php' method='GET' onsubmit='return confirm(\"Sei sicuro di voler eliminare?\")'>";
+                        echo "<form action='elimina_partecipante.php' method='GET' onsubmit='return confirm(\"Sei sicuro di voler eliminare?\")'>";
                         echo "<input type='hidden' name='id' value='" . $row2["id"] . "'>";
                         echo "<button type='submit'>ELIMINA</button>";
                         echo "</td>";

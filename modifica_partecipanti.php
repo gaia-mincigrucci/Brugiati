@@ -19,7 +19,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $email = $_POST['email'];
 
     // Aggiorna i dati nel database
-    $stmt = $conn->prepare("UPDATE utenti SET nome=?, Cognome=?, Eta=?, Email=? WHERE id=?");
+    $stmt = $conn->prepare("UPDATE partecipanti_attivita SET nome=?, cognome=?, eta=?, email=? WHERE id=?");
     $stmt->bind_param("ssisi", $nome, $cognome, $eta, $email, $id);
     $stmt->execute();
     $stmt->close();
@@ -34,7 +34,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 if (isset($_GET['id'])) {
     $id = intval($_GET['id']);
     
-    $stmt = $conn->prepare("SELECT * FROM utenti WHERE id=?");
+    $stmt = $conn->prepare("SELECT * FROM partecipanti_attivita WHERE id=?");
     $stmt->bind_param("i", $id);
     $stmt->execute();
     $result = $stmt->get_result();
@@ -42,7 +42,7 @@ if (isset($_GET['id'])) {
     $stmt->close();
     
     if (!$utente) {
-        die("Utente non trovato!");
+        die("Partecipante non trovato!");
     }
 } else {
     // Se non c'è nessun ID, rimanda alla home o admin
@@ -56,7 +56,7 @@ if (isset($_GET['id'])) {
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Modifica Utente</title>
+  <title>Modifica Partecipante</title>
   <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
   <style>
     body {
@@ -92,30 +92,29 @@ if (isset($_GET['id'])) {
 <body>
 
 <div class="form-container">
-  <h2 class="text-center mb-4">Modifica Utente</h2>
+  <h2 class="text-center mb-4">Modifica Partecipante</h2>
   
-  <form method="POST" action="modifica_utente.php">
+  <form method="POST" action="modifica_partecipanti.php">
     <input type="hidden" name="id" value="<?php echo $utente['id']; ?>">
-    
     <div class="mb-3">
       <label for="fname" class="form-label">Nome:</label>
-      <input type="text" class="form-control" id="fname" name="fname" value="<?php echo htmlspecialchars($utente['nome']); ?>" required>
+      <input type="text" class="form-control" id="fname" name="fname" value="<?php echo htmlspecialchars($utente['nome']); ?>" >
     </div>
     <div class="mb-3">
       <label for="lname" class="form-label">Cognome:</label>
-      <input type="text" class="form-control" id="lname" name="lname" value="<?php echo htmlspecialchars($utente['cognome']); ?>" required>
+      <input type="text" class="form-control" id="lname" name="lname" value="<?php echo htmlspecialchars($utente['cognome']); ?>" >
     </div>
     <div class="mb-3">
       <label for="age" class="form-label">Età:</label>
-      <input type="number" class="form-control" id="age" name="age" min="0" max="100" value="<?php echo htmlspecialchars($utente['eta']); ?>" required>
+      <input type="number" class="form-control" id="age" name="age" min="0" max="100" value="<?php echo htmlspecialchars($utente['eta']); ?>" >
     </div>
     <div class="mb-3">
       <label for="attivita" class="form-label">Nome Attività:</label>
-      <input type="text" class="form-control" id="attivita" name="attivita" value="<?php echo htmlspecialchars($utente['nome_attivita']); ?>" required>
+      <input type="text" class="form-control" id="attivita" name="attivita" value="<?php echo htmlspecialchars($utente['nome_attivita']); ?>">
     </div>
     <div class="mb-3">
       <label for="data_iscrizione" class="form-label">Data Iscrizione:</label>
-      <input type="text" class="form-control" id="data_iscrizione" name="data_iscrizione" value="<?php echo htmlspecialchars($utente['data_iscrizione']); ?>" required>
+      <input type="text" class="form-control" id="data_iscrizione" name="data_iscrizione" value="<?php echo htmlspecialchars($utente['data_iscrizione']); ?>">
     </div>
     <div class="text-center mt-4">
       <button type="submit" class="btn btn-success px-4 py-2 me-2"> Salva Modifiche</button>
