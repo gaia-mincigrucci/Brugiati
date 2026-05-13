@@ -12,11 +12,13 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $email = $_POST['email'];
     $password = $_POST['password'];
     
-    // 1. HASHING DELLA PASSWORD
-    $password_hashed = password_hash($password, PASSWORD_DEFAULT);
+    $password_hash = password_hash($password, PASSWORD_DEFAULT);
     
-    // Controllo Admin
-    $ruolo = ($email === "giuliobrugiati5@gmail.com") ? 'admin' : 'utente';
+    if ($email === "giuliobrugiati5@gmail.com") {
+        $ruolo = "admin";
+    } else {
+        $ruolo = "utente";
+    }
 
     $host = "localhost";
     $dbname = "sito_volontariato";
@@ -27,27 +29,46 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         $pdo = new PDO("mysql:host=$host;dbname=$dbname;charset=utf8", $user, $pass);
         $pdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
 
-        // Inserimento con password hashata
+        $checkEmail = "SELECT COUNT(*) FROM utenti WHERE Email = :Email";
+        $stmtCheck = $pdo->prepare($checkEmail);
+        $stmtCheck->execute([':Email' => $email]);
+        
+        if ($stmtCheck->fetchColumn() > 0) {
+            if ($ruolo === 'admin') {
+                header("Location: admin.php");
+            } else {
+                header("Location: prenotazione.php");
+            }
+            exit();
+        }
+
         $sql = "INSERT INTO utenti (Email, password, ruolo) VALUES (:Email, :password, :ruolo)";
         $stmt = $pdo->prepare($sql);
         $stmt->execute([
             ":Email" => $email,
-            ":password" => $password_hashed,
+            ":password" => $password_hash,
             ":ruolo" => $ruolo
         ]);
 
         $_SESSION['email'] = $email;
         $_SESSION['ruolo'] = $ruolo;
 
-        // 2. INVIO EMAIL CON PHPMAILER
         $mail = new PHPMailer(true);
         $mail->isSMTP();
         $mail->Host = 'smtp.gmail.com';
         $mail->SMTPAuth = true;
         $mail->Username = 'giuliobrugiati5@gmail.com';
-        $mail->Password = 'tua_password_app'; // Inserisci qui la tua password per app di Google
-        $mail->SMTPSecure = 'tls';
+        $mail->SMTPSecure = PHPMailer::ENCRYPTION_STARTTLS;
+        $mail->Password = 'cntq wzgs amte ekfu';
         $mail->Port = 587;
+        
+        $mail->SMTPOptions = array(
+          'ssl' => array(
+          'verify_peer' => false,
+          'verify_peer_name' => false,
+          'allow_self_signed' => true
+          )
+        );
 
         $mail->setFrom('giuliobrugiati5@gmail.com', 'Volontariato');
         $mail->addAddress($email);
@@ -55,7 +76,6 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         $mail->Body = "Grazie per esserti unito a noi. La tua registrazione con l'email $email è avvenuta con successo.";
         $mail->send();
 
-        // Reindirizzamento in base al ruolo
         if ($ruolo === 'admin') {
             header("Location: admin.php");
         } else {
@@ -73,7 +93,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Registrazione / Accesso</title>
+  <title>Registrazione</title>
   <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
   <style>
     body {
@@ -151,7 +171,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     // 3. LOGICA JSON COME RICHIESTO
     const dati = {
         email: email,
-        password: password, // Nel JSON del browser appare in chiaro per l'utente, nel DB sarà hashatata
+        password: password,
     };
     const jsonString = JSON.stringify(dati, null, 2);
     const blob = new Blob([jsonString], { type: 'application/json' });
@@ -163,7 +183,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     a.click();
     document.body.removeChild(a);
     
-    return true; // Prosegue con l'invio del form al PHP
+    return true;
   }
 </script>
 </body>

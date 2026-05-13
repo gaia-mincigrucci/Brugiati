@@ -1,178 +1,232 @@
-/* stili.css - File CSS esterno per il sito sul volontariato ambientale */
-
-/* Reset CSS di base */
+/* 1. RESET E BASE */
 * {
     margin: 0;
     padding: 0;
     box-sizing: border-box;
-    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    font-family: 'Poppins', 'Segoe UI', sans-serif;
 }
 
-/* Stile generale del body */
-body {
-    background-color: #e8f5e9; /* Un verde chiaro più elegante di lightgreen */
+body 
+{
+    background: linear-gradient(135deg, #a8e6a1, #7fdc86, #63c76b);
+    background-attachment: fixed;
+    min-height: 100vh;
     color: #333;
     line-height: 1.6;
     padding: 20px;
-    max-width: 1200px;
-    margin: 0 auto;
+    display: flex;
+    flex-direction: column;
+    align-items: center; /* Centra orizzontalmente */
+    justify-content: flex-start; /* Permette alla pagina di scendere se è lunga */
 }
 
-/* Menu di navigazione */
-#menu {
-    background-color: #2e7d32; /* Verde scuro */
+/* 2. MENU DI NAVIGAZIONE */
+#menu 
+{
+    background-color: #2e7d32;
     list-style-type: none;
     padding: 0;
     margin-bottom: 30px;
     border-radius: 8px;
     box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
     overflow: hidden;
-    /* position: sticky;  <-- rimosso */
-    /* top: 0;            <-- rimosso */
-    /* z-index: 100;      <-- rimosso */
+    width: 100%;
+    max-width: 1200px;
+    display: flex;
+    justify-content: center;
 }
 
-#menu li {
-    display: inline-block;
-}
-
-#menu li a {
+#menu li a 
+{
     display: block;
     color: white;
-    text-align: center;
-    padding: 16px;
+    padding: 16px 25px;
     text-decoration: none;
     font-weight: bold;
     transition: background-color 0.3s;
 }
 
-#menu li a:hover {
-    background-color: #1b5e20; /* Verde più scuro per l'hover */
+#menu li a:hover 
+{
+    background-color: #1b5e20;
 }
 
-/* Stile titoli */
-h1 {
+/* 3. TESTI FACILITATI (Sfondo per visibilità) */
+/* Applica questa classe ai <p> o ai contenitori di testo */
+.testo-chiaro, p 
+{
+    background-color: rgba(255, 255, 255, 0.85); /* Sfondo bianco trasparente */
+    padding: 15px 25px;
+    border-radius: 12px;
+    box-shadow: 0 2px 5px rgba(0,0,0,0.05);
+    max-width: 900px;
+    margin: 10px auto 20px auto;
     text-align: center;
-    color: #1b5e20;
+}
+
+h1 
+{
     text-align: center;
-    margin: 30px 0;
-    font-size: 2.5rem;
+    color: #1b5e20; /* Verde molto scuro per risaltare */
+    margin: 20px auto;
+    font-size: 2.8rem; /* Dimensione contenuta */
     letter-spacing: 1px;
     text-transform: uppercase;
-    text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.1);
-}
-
-h2, h3 {
-    color: #2e7d32;
-    margin: 25px 0 15px 0;
-    border-bottom: 2px solid #81c784;
-    padding-bottom: 10px;
-}
-
-/* Stile per le immagini */
-
-img {
-    max-width: 100%;
-    height: auto;
-    border-radius: 10px;
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    
+    /* Ombra leggera bianca per staccare dal fondo verde senza usare riquadri */
+    text-shadow: 2px 2px 4px rgba(255, 255, 255, 0.5);
     display: block;
-    margin: 20px auto;  /* questo centra le immagini orizzontalmente */
-    text-align: center; /* anche se di solito non serve per le img */
-    padding: 0;         /* rimuove eventuali padding */
+    width: 100%;
 }
 
-/* Stile per i paragrafi */
-p {
-    margin-bottom: 20px;
-    font-size: 1.1rem;
+h2, h3 
+{
+    color: #2e7d32;
+    margin: 15px auto 10px auto;
+    text-align: center;
+    font-size: 2.3rem; /* Più piccolo e discreto */
+    text-transform: none; /* Rimuove il tutto maiuscolo se preferisci */
+    
+    /* Sottile linea verde sotto invece dello sfondo */
+    border-bottom: 2px solid rgba(46, 125, 50, 0.3);
+    padding-bottom: 5px;
+    display: table; /* Serve solo a non far andare la linea da parte a parte */
+}
+/* 4. FORM E CONTENITORI (Login/Registrazione/Modifica) */
+.form-container, form 
+{
+    width: 100%;
+    max-width: 500px;
+    padding: 30px;
+    background-color: #f9fff9;
+    border-radius: 20px;
+    border: 2px solid #6cc96c;
+    box-shadow: 0 6px 15px rgba(0, 100, 0, 0.2);
+    margin: 20px auto;
 }
 
-/* Stile per le liste */
-ul {
-    margin-left: 20px;
-    margin-bottom: 20px;
-}
-
-ul li {
+form label 
+{
+    font-weight: bold;
+    color: #2e7d32;
+    display: block;
     margin-bottom: 8px;
+    text-align: left;
 }
 
-/* Stile del bottone */
-button {
+form input, form select 
+{
+    width: 100%;
+    padding: 12px;
+    margin-bottom: 20px;
+    border: 1px solid #ddd;
+    border-radius: 6px;
+}
+
+/* 5. TABELLE (Admin) */
+.container-admin 
+{
+    width: 100%;
+    max-width: 1200px;
+}
+
+table 
+{
+    width: 100%;
+    border-collapse: collapse;
+    background: white;
+    border-radius: 12px;
+    overflow: hidden;
+    box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+    margin-bottom: 40px;
+}
+
+th, td 
+{
+    padding: 15px;
+    text-align: left;
+    border-bottom: 1px solid #eee;
+}
+
+th 
+{
+    background-color: #2e7d32;
+    color: white;
+    text-transform: uppercase;
+}
+
+/* 6. BOTTONI */
+button, .btn-success 
+{
     background-color: #2e7d32;
     color: white;
     border: none;
     padding: 12px 24px;
-    text-align: center;
-    text-decoration: none;
-    display: inline-block;
-    font-size: 16px;
-    margin: 10px 0;
     cursor: pointer;
     border-radius: 6px;
-    transition: background-color 0.3s, transform 0.2s;
     font-weight: bold;
+    transition: 0.3s;
 }
 
-button:hover {
+button:hover, .btn-success:hover 
+{
     background-color: #1b5e20;
     transform: translateY(-2px);
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
 }
 
-/* Stile per il form */
-form {
-    background: white;
-    padding: 25px;
-    border-radius: 10px;
-    box-shadow: 0 0 20px rgba(0, 0, 0, 0.1);
-    max-width: 500px;
-    margin: 0 auto;
-}
-
-form label {
+/* BOTTONI TABELLA */
+.btn-tabella 
+{
+    padding: 8px 12px;
+    font-size: 0.85rem;
+    border-radius: 5px;
+    border: none;
     font-weight: bold;
-    color: #2e7d32;
-    display: block;
-    margin-bottom: 5px;
+    color: white;
 }
 
-form input[type="text"] {
-    width: 100%;
-    padding: 10px;
-    margin-bottom: 15px;
-    border: 1px solid #ddd;
-    border-radius: 4px;
-    font-size: 1rem;
-    transition: border-color 0.3s;
+.btn-modifica { background-color: #34a853; }
+.btn-elimina { background-color: #d32f2f; }
+
+/* FIX PER I FORM DENTRO LA TABELLA */
+td form 
+{
+    background: none !important;
+    padding: 0 !important;
+    box-shadow: none !important;
+    border: none !important;
+    width: auto !important;
+    margin: 0 !important;
+    display: inline-block !important;
 }
 
-form input[type="text"]:focus {
-    border-color: #2e7d32;
-    outline: none;
-    box-shadow: 0 0 5px rgba(46, 125, 50, 0.3);
+.cella-azioni 
+{
+    display: flex;
+    gap: 8px;
 }
 
-/* Responsive design */
-@media (max-width: 768px) {
-    #menu li {
-        display: block;
-    }
-
-    #menu li a {
-        border-bottom: 1px solid rgba(255, 255, 255, 0.2);
-    }
-
-    h1 {
-        font-size: 2rem;
-    }
+/* 7. IMMAGINI E LISTE */
+img 
+{
+    max-width: 100%;
+    border-radius: 15px;
+    box-shadow: 0 5px 15px rgba(0,0,0,0.2);
+    margin: 20px auto;
 }
 
-/* Stile aggiuntivo per la sezione "Dove siamo e chi siamo" */
-h3 + p {
-    background-color: white;
-    padding: 15px;
-    border-radius: 8px;
-    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+ul 
+{
+    background-color: rgba(255, 255, 255, 0.7);
+    padding: 20px 40px;
+    border-radius: 12px;
+    display: inline-block;
+    text-align: left;
+}
+
+/* RESPONSIVE */
+@media (max-width: 768px) 
+{
+    #menu { flex-direction: column; }
+    h1 { font-size: 1.8rem; }
 }

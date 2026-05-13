@@ -5,32 +5,40 @@
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <link rel="stylesheet" href="stile.css" />
     <style>
-        body { background-color: lightgreen; font-family: Arial, sans-serif; margin: 20px; }
+    /* 1. Rimuovi background-color e font-family da qui perché sono già in stile.css */
+    
+    .gallery {
+        display: flex;
+        flex-direction: column;
+        gap: 20px;
+        max-width: 800px;
+        margin: 0 auto; /* AGGIUNGI QUESTO: centra la galleria nella pagina */
+    }
 
-        .gallery {
-            display: flex;
-            flex-direction: column;
-            gap: 15px;
-            max-width: 700px;
-        }
+    .activity {
+        display: flex;
+        align-items: center;
+        gap: 20px;
+        background: white; /* Rende le attività più leggibili */
+        padding: 15px;
+        border-radius: 10px;
+        box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+    }
 
-        .activity {
-            display: flex;
-            align-items: center;
-            gap: 10px;
-        }
+    /* Sovrascrivi lo stile delle immagini solo per la galleria */
+    .activity img {
+        width: 200px;
+        height: 150px;
+        object-fit: cover; /* Evita che l'immagine si deformi */
+        margin: 0; /* Rimuove il margin auto di stile.css che le centrerebbe da sole */
+        flex-shrink: 0;
+    }
 
-        .activity img {
-            width: 200px;
-            height: 200px;
-            flex-shrink: 0;
-        }
-
-        .description {
-            font-weight: normal;
-            color: #222;
-        }
-    </style>
+    .description {
+        font-size: 1.1rem;
+        color: #333;
+    }
+</style>
     <title>Volontariato Ambientale</title>
 </head>
 <body>
