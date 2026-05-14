@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 <?php
 require 'phpmailer/src/Exception.php';
 require 'phpmailer/src/PHPMailer.php';
@@ -50,3 +51,6 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 
     $mail->send();
 }
+=======
+
+>>>>>>> 0e8f1178688de2d6a2e6862d39f672bbfeee97bf
