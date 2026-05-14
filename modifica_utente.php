@@ -90,6 +90,7 @@ if (isset($_GET['id'])){
 <body>
 <div class="form-container">
     <h2>Modifica Utente</h2>
+    //form per modificare utenti
     <form method="POST" action="modifica_utente.php">
         <input type="hidden" name="id" value="<?php echo $utente['id']; ?>">
         <div class="mb-3">

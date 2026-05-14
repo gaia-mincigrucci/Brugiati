@@ -24,15 +24,15 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         die("Errore di connessione: " . $e->getMessage());
     }
     try{
+    //inserimento utneti nel db
     $sql = "INSERT INTO Utenti (Nome, Cognome, Eta, Email) VALUES (:Nome, :Cognome, :Eta, :Email)";
     $stmt = $pdo->prepare($sql);
     $stmt->execute([":Nome" => $nome, ":Cognome" => $cognome, ":Eta" => $eta, ":Email" => $email]);
     }catch(Exception $e){
         die("Errore di inserimento:" . $e->getMessage());
     }
-
+    //invio email
     $mail = new PHPMailer(true);
-    
     $mail->isSMTP();
     $mail->Host = 'smtp.gmail.com';
     $mail->SMTPAuth = true;        

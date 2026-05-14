@@ -93,7 +93,7 @@ if (isset($_GET['id'])) {
 
 <div class="form-container">
   <h2 class="text-center mb-4">Modifica Partecipante</h2>
-  
+  //form per modificare i partecipanti
   <form method="POST" action="modifica_partecipanti.php">
     <input type="hidden" name="id" value="<?php echo $utente['id']; ?>">
     <div class="mb-3">

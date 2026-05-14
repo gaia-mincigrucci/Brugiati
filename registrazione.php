@@ -7,19 +7,19 @@ use PHPMailer\PHPMailer\Exception;
 require 'phpmailer/src/Exception.php';
 require 'phpmailer/src/PHPMailer.php';
 require 'phpmailer/src/SMTP.php';
-
+//prende i dati dal form
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $email = $_POST['email'];
     $password = $_POST['password'];
-    
+    //hash della passowrd
     $password_hash = password_hash($password, PASSWORD_DEFAULT);
-    
+    //assegnazione del ruolo
     if ($email === "giuliobrugiati5@gmail.com") {
         $ruolo = "admin";
     } else {
         $ruolo = "utente";
     }
-
+    //connessione al db
     $host = "localhost";
     $dbname = "sito_volontariato";
     $user = "root";
@@ -27,7 +27,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     try {
         $pdo = new PDO("mysql:host=$host;dbname=$dbname;charset=utf8", $user, $pass);
         $pdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
-
+        //controllare se utente esiste
         $stmtCheck = $pdo->prepare("SELECT ruolo FROM utenti WHERE Email = :Email");
         $stmtCheck->execute([':Email' => $email]);
         $userEsistente = $stmtCheck->fetch();
@@ -37,7 +37,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
             header("Location: " . ($_SESSION['ruolo'] === 'admin' ? "admin.php" : "prenotazione.php"));
             exit();
         }
-
+        //inserimento utente nel db
         $sql = "INSERT INTO utenti (Email, password, ruolo) VALUES (:Email, :password, :ruolo)";
         $stmt = $pdo->prepare($sql);
         $stmt->execute([
@@ -45,10 +45,10 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
             ":password" => $password_hash,
             ":ruolo" => $ruolo
         ]);
-
+        //assegnazione variabili di sessione
         $_SESSION['email'] = $email;
         $_SESSION['ruolo'] = $ruolo;
-
+        //invio email
         $mail = new PHPMailer(true);
         $mail->isSMTP();
         $mail->Host = 'smtp.gmail.com';
@@ -130,6 +130,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 </head>
 <body>
 <div class="form-container">
+  //form di login 
   <h2 class="text-center mb-4">Registrazione</h2>
   <form id="registration-form" method="POST" action="registrazione.php">
     <div class="mb-3">
@@ -148,6 +149,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
 <script>
+  //salvare in json 
   function salvainjson() {
     const email = document.getElementById('email').value.trim();
     const password = document.getElementById('password').value;

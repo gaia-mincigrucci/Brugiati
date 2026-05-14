@@ -21,6 +21,7 @@ if ($conn->connect_error) {
     <title>Admin</title>
 </head>
 <body>
+    //tabelle per utenti e partecipanti
     <?php include 'menu.php'; ?>
     <div class="container-admin">
         <h1>Pannello di Controllo</h1>
@@ -48,6 +49,7 @@ if ($conn->connect_error) {
                         echo "<td class='password-cell'>" . htmlspecialchars($row["password"]) . "</td>";
                         echo "<td>" . $row["ruolo"] . "</td>";
                         echo "<td>";
+                        //bottoni per modifica e elimina
                         echo "<form action='modifica_utente.php' method='GET'>";
                         echo "<input type='hidden' name='id' value='" . $row["id"] . "'>";
                         echo "<button type='submit'>MODIFICA</button>";
@@ -97,6 +99,7 @@ if ($conn->connect_error) {
                         echo "<td>" . htmlspecialchars($row2["nome_attivita"]) . "</td>";
                         echo "<td>" . $row2["data_iscrizione"] . "</td>";
                         echo "<td>";
+                        //bottoni per modifica e elimina
                         echo "<form action='modifica_partecipanti.php' method='GET'>";
                         echo "<input type='hidden' name='id' value='" . $row2["id"] . "'>";
                         echo "<button type='submit'>MODIFICA</button>";

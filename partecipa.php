@@ -29,9 +29,9 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 </head>
 <body>
 <div class="form-container">
+  //form per partecipare a una attività
   <h2 class="text-center mb-2">Partecipazione</h2>
   <div class="info-att text-center">Stai partecipando a:<br> <?php echo $nome_attivita; ?></div>
-  
   <form method="POST" action="partecipa.php">
     <input type="hidden" name="nome_attivita" value="<?php echo $nome_attivita; ?>">
 
