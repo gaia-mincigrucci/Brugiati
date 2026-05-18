@@ -4,7 +4,7 @@ if (session_status() === PHP_SESSION_NONE) {
 }
 ?>
 <ul id="menu">
-    //menu e in base alla variabile di sessione ruolo mostra un menu diverso
+    <!--menu e in base alla variabile di sessione ruolo mostra un menu diverso-->
     <li><a href="index.php">HOME</a></li>
     <li><a href="cosa.php">CHE COS'È IL VOLONTARIATO AMBIENTALE</a></li>
     <li><a href="comporta.php">CHE COSA COMPORTA IL VOLONTARIATO AMBIENTALE</a></li>

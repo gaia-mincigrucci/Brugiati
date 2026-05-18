@@ -21,7 +21,7 @@ if ($conn->connect_error) {
     <title>Admin</title>
 </head>
 <body>
-    //tabelle per utenti e partecipanti
+    <!--tabelle per utenti e partecipanti -->
     <?php include 'menu.php'; ?>
     <div class="container-admin">
         <h1>Pannello di Controllo</h1>

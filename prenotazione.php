@@ -16,7 +16,7 @@ if(!isset($_SESSION['ruolo'])) {
     <title>Prenotazione Attività</title>
 </head>
 <body>
-    //attivita che gli utenti possono prenotare
+    <!--attivita che gli utenti possono prenotare -->
     <?php include 'menu.php'; ?>
     <h2>Prenota la tua partecipazione</h2>
     <div class="gallery">

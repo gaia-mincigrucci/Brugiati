@@ -130,7 +130,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 </head>
 <body>
 <div class="form-container">
-  //form di login 
+  <!--form di login -->
   <h2 class="text-center mb-4">Registrazione</h2>
   <form id="registration-form" method="POST" action="registrazione.php">
     <div class="mb-3">
@@ -149,7 +149,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
 <script>
-  //salvare in json 
+  // salvare in json 
   function salvainjson() {
     const email = document.getElementById('email').value.trim();
     const password = document.getElementById('password').value;
